@@ -11,7 +11,7 @@ module.exports = {
     "USER" : "shoaibahamedshafi@gmail.com",
     "PASSWORD" : "Shoaib@Greelab92",
 
-    "SECRET": "28b9033a89323be3247f1870978fa205",
+    "NEXTAUTH_SECRET": "28b9033a89323be3247f1870978fa205",
       
       "GOOGLE_SECRET" : "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",
       "GOOGLE_ID" : "969582262110-gu9so72i2n2vfiefckosnudnm3poletd.apps.googleusercontent.com",
