@@ -36,7 +36,7 @@ const Navbar = () => {
     
   return (
     <div className="flex items-center justify-between border-b border-green-800 py-6 px-12">
-      <Link href="/"><a className="text-3xl"> <span className="text-green-800">LOGO</span></a></Link>
+      <Link href="/"><a className="text-3xl"> <span className="text-green-800">Nesoi</span> One</a></Link>
       <nav>
         <section className="MOBILE-MENU flex lg:hidden">
           <div

@@ -46,7 +46,7 @@ function User({ session, handleSignOut }){
           </div>
           <div>
             <h5 className="text-2xl">Hello , {session.user.name}.</h5>
-            <h3 className="text-xl">Welcome to family.</h3>
+            <h3 className="text-xl">Welcome to Nesoi family.</h3>
           </div>
       </main>
     </>
