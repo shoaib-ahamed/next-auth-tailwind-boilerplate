@@ -7,6 +7,8 @@ import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import login_validate from '../lib/validate';
 import { DataContext } from '../store/GlobalState';
 import styles from '../styles/Form.module.css';
+const baseUrl = process.env.NEXTAUTH_URL
+
 
 
 
@@ -50,12 +52,12 @@ export default function SignIn(){
 
     // Google Handler function
     async function handleGoogleSignin(){
-        signIn('google', { callbackUrl : "http://localhost:3000"})
+        signIn('google', { callbackUrl : `${baseUrl}`})
     }
 
     // Github Login 
     async function handleGithubSignin(){
-        signIn('github', { callbackUrl : "http://localhost:3000"})
+        signIn('github', { callbackUrl : `${baseUrl}`})
     }
 
     return (
