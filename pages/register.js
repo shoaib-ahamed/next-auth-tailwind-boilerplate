@@ -7,6 +7,8 @@ import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import Layout from '../layout/layout';
 import { registerValidate } from '../lib/validate';
 import styles from '../styles/Form.module.css';
+const baseUrl = process.env.NEXTAUTH_URL
+
 
 export default function Register(){
 
@@ -30,10 +32,10 @@ export default function Register(){
             body: JSON.stringify(values)
         }
 
-        await fetch('http://localhost:3000/api/auth/signup', options)
+        await fetch(`${baseUrl}/api/auth/signup`, options)
             .then(res => res.json())
             .then((data) => {
-                if(data) router.push('http://localhost:3000')
+                if(data) router.push(`${baseUrl}`)
             })
     }
 
