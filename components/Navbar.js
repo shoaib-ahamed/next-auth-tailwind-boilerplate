@@ -36,7 +36,7 @@ const Navbar = () => {
     
   return (
     <div className="flex items-center justify-between border-b border-green-800 py-6 px-12">
-      <Link href="/"><a className="text-3xl"> <span className="text-green-800">Nesoi</span> One</a></Link>
+      <Link href="/"><a className="text-3xl"> <span className="text-winterSky">Nesoi</span> One</a></Link>
       <nav>
         <section className="MOBILE-MENU flex lg:hidden">
           <div
@@ -54,7 +54,7 @@ const Navbar = () => {
               onClick={() => setIsNavOpen(false)}
             >
               <svg
-                className="h-8 w-8 text-green-800"
+                className="h-8 w-8 text-winterSky"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -67,16 +67,19 @@ const Navbar = () => {
               </svg>
             </div>
             <ul className="flex flex-col items-center justify-center gap-6 min-h-screen">
-              <li className="border-b border-green-800 my-2 uppercase">
+              <li className="border-b border-winterSky my-2 uppercase">
                 <a href="/about">About</a>
               </li>
-              <li className="border-b border-green-800 my-2 uppercase">
+              {(session.data) ?
+              <li className="border-b border-winterSky my-2 uppercase">
                 <Link href="/profile">Profile</Link>
               </li>
-              <li className="border-b border-green-800 my-2 uppercase">
+              :
+              <></>}
+              <li className="border-b border-winterSky my-2 uppercase">
                 <a href="/contact">Contact</a>
               </li>
-              {(session.data) ? <li> <button onClick={() => signOut()} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
+              {(session.data) ? <li> <button onClick={() => signOut()} className="bg-winterSky text-white px-5 py-3"><VscSignOut/></button>
               </li> : <></>}
               {/* <li>
                 <RenderThemeChanger/>
@@ -89,13 +92,16 @@ const Navbar = () => {
           <li>
             <a href="/about">About</a>
           </li>
-          <li>
-            <Link href={"/profile"}>Profile</Link>
-          </li>
+          {(session.data) ?
+              <li>
+                <Link href="/profile">Profile</Link>
+              </li>
+              :
+              <></>}
           <li>
             <a href="/contact">Contact</a>
           </li>
-          {(session.data) ? <li> <button onClick={() => signOut()} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
+          {(session.data) ? <li> <button onClick={() => signOut()} className="bg-winterSky text-white px-5 py-3"><VscSignOut/></button>
               </li> : <></>}
           {/* <li>
             <RenderThemeChanger/>

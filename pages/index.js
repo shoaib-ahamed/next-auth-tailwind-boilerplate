@@ -44,7 +44,7 @@ function User({ session, handleSignOut }){
           <div>
             <Sidebar handleSignOut={handleSignOut}/>
           </div>
-          <div>
+          <div className="w-full  text-center ">
             <h5 className="text-2xl">Hello , {session.user.name}.</h5>
             <h3 className="text-xl">Welcome to Nesoi family.</h3>
           </div>

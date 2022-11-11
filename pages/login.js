@@ -69,11 +69,11 @@ export default function Login(){
                         </div>
                     </div>
 
-                    <div className="w-full md:w-4/5 flex flex-col justify-center items-center bg-green-800 text-white rounded-2xl md:rounded-tr-2xl md:rounded-br-2xl py-36 px-10 gap-5">
+                    <div className="w-full md:w-4/5 flex flex-col justify-center items-center bg-winterSky text-white rounded-2xl md:rounded-tr-2xl md:rounded-br-2xl py-36 px-10 gap-5">
                         <h2 className="text-2xl md:text-3xl font-bold mb-2">Welcome to Nesoi Family</h2>
                         <div className="border-2 w-10 border-white mb-2" />
                         <p className="mb-10">Fill up the information and start the journey with us...</p>
-                    <button type="button" className="border-2 border-white rounded-full px-12 py-2 inline-block font-bold bg-white text-green-800 hover:bg-green-800 hover:text-white">
+                    <button type="button" className="border-2 border-white rounded-full px-12 py-2 inline-block font-bold bg-jet text-white hover:bg-winterSky hover:text-white">
                     <Link href="/register">Sign Up</Link>
                     </button>
                     </div>

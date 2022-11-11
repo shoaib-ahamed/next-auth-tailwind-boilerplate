@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import Layout from '../layout/layout';
 import { registerValidate } from '../lib/validate';
-import styles from '../styles/Form.module.css';
 
 export default function Register(){
 
@@ -52,12 +51,12 @@ export default function Register(){
 
             {/* form */}
             <form className='flex flex-col gap-5' onSubmit={formik.handleSubmit}>
-                <div className={`${styles.input_group} ${formik.errors.username && formik.touched.username ? 'border-rose-600' : ''}`}>
+                <div className={`flex position:relative ${formik.errors.username && formik.touched.username ? 'border-rose-600' : ''}`}>
                     <input 
                     type="text"
                     name='Username'
                     placeholder='Username'
-                    className={styles.input_text}
+                    className="w-full py-4 px-6 border rounded-xl bg-slate-50 focus:outline-none border-none"
                     {...formik.getFieldProps('username')}
                     />
                     <span className='icon flex items-center px-4'>
@@ -65,12 +64,12 @@ export default function Register(){
                     </span>
                 </div>
                 {/* {formik.errors.username && formik.touched.username ? <span className='text-rose-500'>{formik.errors.username}</span> : <></>} */}
-                <div className={`${styles.input_group} ${formik.errors.email && formik.touched.email ? 'border-rose-600' : ''}`}>
+                <div className={`flex position:relative ${formik.errors.email && formik.touched.email ? 'border-rose-600' : ''}`}>
                     <input 
                     type="email"
                     name='email'
                     placeholder='Email'
-                    className={styles.input_text}
+                    className="w-full py-4 px-6 border rounded-xl bg-slate-50 focus:outline-none border-none"
                     {...formik.getFieldProps('email')}
                     />
                     <span className='icon flex items-center px-4'>
@@ -78,12 +77,12 @@ export default function Register(){
                     </span>
                 </div>
                 {/* {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>} */}
-                <div className={`${styles.input_group} ${formik.errors.password && formik.touched.password ? 'border-rose-600' : ''}`}>
+                <div className={`flex position:relative ${formik.errors.password && formik.touched.password ? 'border-rose-600' : ''}`}>
                     <input 
                     type={`${show.password ? "text" : "password"}`}
                     name='password'
                     placeholder='password'
-                    className={styles.input_text}
+                    className="w-full py-4 px-6 border rounded-xl bg-slate-50 focus:outline-none border-none"
                     {...formik.getFieldProps('password')}
                     />
                      <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, password: !show.password})}>
@@ -92,12 +91,12 @@ export default function Register(){
                 </div>
                 {/* {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>} */}
 
-                <div className={`${styles.input_group} ${formik.errors.cpassword && formik.touched.cpassword ? 'border-rose-600' : ''}`}>
+                <div className={`flex position:relative ${formik.errors.cpassword && formik.touched.cpassword ? 'border-rose-600' : ''}`}>
                     <input 
                     type={`${show.cpassword ? "text" : "password"}`}
                     name='cpassword'
                     placeholder='Confirm Password'
-                    className={styles.input_text}
+                    className="w-full py-4 px-6 border rounded-xl bg-slate-50 focus:outline-none border-none"
                     {...formik.getFieldProps('cpassword')}
                     />
                      <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, cpassword: !show.cpassword})}>
@@ -107,8 +106,8 @@ export default function Register(){
                 {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
 
                 {/* login buttons */}
-                <div className="input-button">
-                    <button type='submit' className={styles.button}>
+                <div className="flex justify-center">
+                    <button type='submit' className="w-2/3 rounded-md py-3 text-jet bg-winterSky text-lg">
                         Sign Up
                     </button>
                 </div>
@@ -116,7 +115,7 @@ export default function Register(){
 
             {/* bottom */}
             <p className='text-center text-gray-400 '>
-                Have an account? <Link href={'/login'}><a className='text-blue-700'>Sign In</a></Link>
+                Have an account? <Link href={'/login'}><a className='text-winterSky'>Sign In</a></Link>
             </p>
         </section>
         </Layout>
