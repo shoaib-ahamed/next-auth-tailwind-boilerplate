@@ -32,7 +32,7 @@ export default function SignIn(){
             redirect: false,
             email: values.email,
             password: values.password,
-            callbackUrl: "https://next-auth-tailwind-boilerplate.vercel.app"
+            callbackUrl: "/"
         })
 
         // if(status.ok) return  dispatch({ type: 'NOTIFY', payload: {loading: true}})
