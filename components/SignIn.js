@@ -26,18 +26,13 @@ export default function SignIn(){
         onSubmit
     })
 
-    /**
-     * haleykennedy@gmail.com
-     * admin123
-     */
-
     async function onSubmit(values){
         
         const status = await signIn('credentials', {
             redirect: false,
             email: values.email,
             password: values.password,
-            callbackUrl: "/"
+            callbackUrl: "https://next-auth-tailwind-boilerplate.vercel.app"
         })
 
         // if(status.ok) return  dispatch({ type: 'NOTIFY', payload: {loading: true}})
