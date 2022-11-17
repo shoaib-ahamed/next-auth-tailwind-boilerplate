@@ -15,7 +15,6 @@ export default function Home() {
 
   const { auth  } = state
 
-  console.log(session.user)
 
   function handleSignOut(){
     signOut()
@@ -48,7 +47,9 @@ function Guest(){
 // Authorize User
 function User({ session, handleSignOut , auth }){
 
-  console.log(auth)
+
+  const {user} = auth
+
   return(
     <>
     <main className="container flex gap-10">
@@ -57,9 +58,9 @@ function User({ session, handleSignOut , auth }){
           </div>
           <div className="w-full  text-center ">
             <h5 className="text-2xl">Hello , {session.user.name}.</h5>
-            {(auth) ? 
-            <h5 className="text-2xl">Phone :.</h5>
-            : null}
+            { Object.keys(auth).length === 0 ? 
+            null
+            : <h5 className="text-2xl">Phone : {auth.user.phone} </h5>}
             <h3 className="text-xl">Welcome to Nesoi family.</h3>
           </div>
       </main>

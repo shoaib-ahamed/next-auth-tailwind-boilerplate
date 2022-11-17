@@ -1,10 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
-import jwt from 'jsonwebtoken'
-import Users from '../../../models/userModel'
-import connectDB from '../../../utils/connectDB'
-import { createAccessToken } from '../../../utils/generateToken'
+import jwt from 'jsonwebtoken';
+import connectMongo from '../../../database/conn';
+import Users from '../../../model/Schema';
+import { createAccessToken } from '../../../utils/generateToken';
 
-connectDB()
+connectMongo()
 
 export default async (req, res) => {
     try{
@@ -22,11 +22,9 @@ export default async (req, res) => {
         res.json({
             access_token,
             user: {
-                name: user.name,
+                name: user.username,
                 email: user.email,
-                role: user.role,
-                avatar: user.avatar,
-                root: user.root
+                phone: user.phone
             }
         })
     }catch(err){

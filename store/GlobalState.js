@@ -16,10 +16,10 @@ export const DataProvider = ({children}) => {
     useEffect(() => {
         const firstLogin = localStorage.getItem('firstLogin')
 
+
         if(firstLogin) {
             getData('auth/accessToken').then(res => {
                 if(res.err) return localStorage.removeItem('firstLogin')
-
                 dispatch({ type: 'AUTH' ,  payload: {
                     token: res.access_token,
                     user: res.user

@@ -2,6 +2,8 @@
 import { compare } from 'bcryptjs';
 import connectMongo from '../../../database/conn';
 import Users from '../../../model/Schema';
+import { createAccessToken, createRefreshToken } from '../../../utils/generateToken';
+
 
 
 
@@ -26,9 +28,14 @@ const login = async (req, res) => {
 
         const isMatch = await compare(password, user.password)
         if(!isMatch) return res.status(400).json({err: 'Incorrect password.'})
+
+        const access_token = createAccessToken({id: user._id})
+        const refresh_token = createRefreshToken({id: user._id})
         
         res.json({
             msg: "Login Success!",
+            refresh_token,
+            access_token,
             user: {
                 name: user.username,
                 email: user.email,

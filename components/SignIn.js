@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import Cookie from 'js-cookie';
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
@@ -6,6 +7,7 @@ import { FaGoogle } from "react-icons/fa";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import login_validate from '../lib/validate';
 import { DataContext } from '../store/GlobalState';
+
 
 
 
@@ -42,15 +44,21 @@ export default function SignIn(){
         const res = await fetch('http://localhost:3000/api/auth/login', options)
             .then(res => res.json())
 
-        console.dir(res)
-
             if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
       
              dispatch({ type: 'NOTIFY' ,  payload: {success: res.msg}})
 
              dispatch({ type: 'AUTH' ,  payload: {
+                token: res.access_token,
                 user: res.user
               }})
+
+            Cookie.set('refreshtoken' , res.refresh_token , {
+                path: 'api/auth/accessToken',
+                expires: 7
+              })
+        
+            localStorage.setItem('firstLogin' , true)
         
         const status = await signIn('credentials', {
             redirect: false,
