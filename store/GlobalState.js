@@ -1,5 +1,8 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useEffect, useReducer } from 'react'
+import { getData } from '../utils/fetchData'
 import reducers from './Reducers'
+
+
 
 
 export const DataContext = createContext()
@@ -10,20 +13,20 @@ export const DataProvider = ({children}) => {
 
     const [state , dispatch] = useReducer(reducers , initialState)
 
-    // useEffect(() => {
-    //     const firstLogin = localStorage.getItem('firstLogin')
+    useEffect(() => {
+        const firstLogin = localStorage.getItem('firstLogin')
 
-    //     if(firstLogin) {
-    //         getData('auth/accessToken').then(res => {
-    //             if(res.err) return localStorage.removeItem('firstLogin')
+        if(firstLogin) {
+            getData('auth/accessToken').then(res => {
+                if(res.err) return localStorage.removeItem('firstLogin')
 
-    //             dispatch({ type: 'AUTH' ,  payload: {
-    //                 token: res.access_token,
-    //                 user: res.user
-    //             }})
-    //         })
-    //     }
-    // })
+                dispatch({ type: 'AUTH' ,  payload: {
+                    token: res.access_token,
+                    user: res.user
+                }})
+            })
+        }
+    })
 
   
 

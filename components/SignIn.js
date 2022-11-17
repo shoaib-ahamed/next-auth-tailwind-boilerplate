@@ -15,7 +15,7 @@ export default function SignIn(){
     const [show, setShow] = useState(false)
     const router = useRouter()
 
-    const [dispatch] = useContext(DataContext)
+    const [state , dispatch] = useContext(DataContext)
     // formik hook
     const formik = useFormik({
         initialValues: {
@@ -32,6 +32,25 @@ export default function SignIn(){
      */
 
     async function onSubmit(values){
+
+        const options = {
+            method: "POST",
+            headers : { 'Content-Type': 'application/json'},
+            body: JSON.stringify(values)
+        }
+
+        const res = await fetch('http://localhost:3000/api/auth/login', options)
+            .then(res => res.json())
+
+        console.dir(res)
+
+            if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
+      
+             dispatch({ type: 'NOTIFY' ,  payload: {success: res.msg}})
+
+             dispatch({ type: 'AUTH' ,  payload: {
+                user: res.user
+              }})
         
         const status = await signIn('credentials', {
             redirect: false,
@@ -40,8 +59,6 @@ export default function SignIn(){
             callbackUrl: "/"
         })
 
-        // if(status.ok) return  dispatch({ type: 'NOTIFY', payload: {loading: true}})
-
 
         if(status.ok) router.push(status.url)
         
@@ -49,6 +66,7 @@ export default function SignIn(){
 
     // Google Handler function
     async function handleGoogleSignin(){
+        dispatch({ type: 'NOTIFY', payload: {}})
         signIn('google', { callbackUrl : "http://localhost:3000"})
     }
 

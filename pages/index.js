@@ -1,12 +1,21 @@
 import { getSession, signOut, useSession } from "next-auth/react"
 import Head from 'next/head'
 import Link from 'next/link'
+import React, { useContext } from 'react'
 import Sidebar from "../components/Sidebar"
+import { DataContext } from '../store/GlobalState'
 import styles from '../styles/Home.module.css'
+
 
 export default function Home() {
 
   const { data: session } = useSession()
+
+  const [state , dispatch] = useContext(DataContext)
+
+  const { auth  } = state
+
+  console.log(session.user)
 
   function handleSignOut(){
     signOut()
@@ -18,7 +27,7 @@ export default function Home() {
         <title>Home Page</title>
       </Head>
 
-      {session ? User({ session, handleSignOut }) : Guest()}
+      {session ? User({ session, handleSignOut , auth }) : Guest()}
     </div>
   )
 }
@@ -37,7 +46,9 @@ function Guest(){
 }
 
 // Authorize User
-function User({ session, handleSignOut }){
+function User({ session, handleSignOut , auth }){
+
+  console.log(auth)
   return(
     <>
     <main className="container flex gap-10">
@@ -46,6 +57,9 @@ function User({ session, handleSignOut }){
           </div>
           <div className="w-full  text-center ">
             <h5 className="text-2xl">Hello , {session.user.name}.</h5>
+            {(auth) ? 
+            <h5 className="text-2xl">Phone :.</h5>
+            : null}
             <h3 className="text-xl">Welcome to Nesoi family.</h3>
           </div>
       </main>
@@ -70,3 +84,22 @@ export async function getServerSideProps({ req }){
     props: { session }
   }
 }
+
+// export async function getServerSideProps({req}) {
+//   const session = await getSession(req);
+  
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: '/login',
+//         permanent: false
+//       },
+//     }
+//   }
+
+//   return {
+//     props: {
+//       ...session,
+//     }
+//   }
+// }

@@ -2,38 +2,54 @@ import { useFormik } from 'formik';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import Layout from '../layout/layout';
 import { registerValidate } from '../lib/validate';
+import { DataContext } from '../store/GlobalState';
+
 
 export default function Register(){
 
     const [show, setShow] = useState({ password: false, cpassword: false })
     const router = useRouter()
+
+    const [state , dispatch] = useContext(DataContext)
+
     const formik = useFormik({
         initialValues: {
             username : '',
             email: '',
             password: '',
-            cpassword: ''
+            cpassword: '',
+            phone: ''
         },
         validate: registerValidate,
         onSubmit
     })
 
     async function onSubmit(values){
+
         const options = {
             method: "POST",
             headers : { 'Content-Type': 'application/json'},
             body: JSON.stringify(values)
         }
 
-        await fetch('http://localhost:3000/api/auth/signup', options)
+        const res = await fetch('http://localhost:3000/api/auth/signup', options)
             .then(res => res.json())
             .then((data) => {
                 if(data) router.push('http://localhost:3000')
-            })
+            }) 
+            
+            
+        if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err } }) 
+    
+
+         
+        
+        
+
     }
 
     return (
@@ -44,7 +60,7 @@ export default function Register(){
             <title>Register</title>
         </Head>
 
-        <section className='w-1/4 mx-auto flex flex-col gap-10'>
+        <section className='w-3/4 md:w-2/4 lg:w-1/4 mx-auto flex flex-col gap-10'>
             <div className="title">
                 <h1 className='text-gray-800 text-4xl text-center font-bold py-4'>Register</h1>
             </div>
@@ -102,6 +118,15 @@ export default function Register(){
                      <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, cpassword: !show.cpassword})}>
                         <HiFingerPrint size={25} />
                     </span>
+                </div>
+                <div className={`flex position:relative ${formik.errors.cpassword && formik.touched.cpassword ? 'border-rose-600' : ''}`}>
+                    <input 
+                    type="text"
+                    name='phone'
+                    placeholder='Phone No.'
+                    className="w-full py-4 px-6 border rounded-xl bg-slate-50 focus:outline-none border-none"
+                    {...formik.getFieldProps('phone')}
+                    />
                 </div>
                 {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
 
