@@ -48,23 +48,10 @@ function Guest(){
 function User({ session, handleSignOut , auth }){
 
 
-  const {user} = auth
-
   return(
-    <>
-    <main className="container flex gap-10">
-          <div>
-            <Sidebar handleSignOut={handleSignOut}/>
-          </div>
-          <div className="w-full  text-center ">
-            <h5 className="text-2xl">Hello , {session.user.name}.</h5>
-            { Object.keys(auth).length === 0 ? 
-            null
-            : <h5 className="text-2xl">Phone : {auth.user.phone} </h5>}
-            <h3 className="text-xl">Welcome to Nesoi family.</h3>
-          </div>
-      </main>
-    </>
+    <main className="container flex gap-10">    
+      <Sidebar handleSignOut={handleSignOut} auth={auth} session={session}s/>
+    </main>
   )
 }
 
