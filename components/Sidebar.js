@@ -16,7 +16,7 @@ const Sidebar = ({handleSignOut}) => {
                         <ul className="pt-2 pb-4 space-y-1 text-sm">
                             <li className="rounded-sm">
                                 <a
-                                    href="#"
+                                    href="./"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
                                     <svg
@@ -36,7 +36,7 @@ const Sidebar = ({handleSignOut}) => {
                                     <span className="hidden md:block">Home</span>
                                 </a>
                             </li>
-                            <li className="rounded-sm">
+                            {/* <li className="rounded-sm">
                                 <a
                                     href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
@@ -57,8 +57,8 @@ const Sidebar = ({handleSignOut}) => {
                                     </svg>
                                     <span className="hidden md:block">Inbox</span>
                                 </a>
-                            </li>
-                            <li className="rounded-sm">
+                            </li> */}
+                            {/* <li className="rounded-sm">
                                 <a
                                     href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
@@ -84,8 +84,8 @@ const Sidebar = ({handleSignOut}) => {
                                     </svg>
                                     <span className="hidden md:block">Settings</span>
                                 </a>
-                            </li>
-                            <li className="rounded-sm">
+                            </li> */}
+                            <li className="rounded-sm" onClick={handleSignOut}>
                                 <a
                                     href="#"
                                     className="flex items-center p-2 space-x-3 rounded-md"
@@ -104,7 +104,7 @@ const Sidebar = ({handleSignOut}) => {
                                             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                                         />
                                     </svg>
-                                    <button type="button" onClick={handleSignOut}>
+                                    <button type="button" >
                                     <span className="hidden md:block">Logout</span>
                                     </button>
                                 </a>

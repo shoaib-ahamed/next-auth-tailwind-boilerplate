@@ -43,6 +43,9 @@ function Guest(){
 
 // Authorize User
 function User({ session, handleSignOut , auth }){
+
+  console.log(session)
+
   return(
     <>
     <main className="container flex gap-10">
@@ -50,12 +53,14 @@ function User({ session, handleSignOut , auth }){
             <Sidebar handleSignOut={handleSignOut}/>
           </div>
           <div className="w-full text-center">
+
+          <h5 className="text-2xl">Hello , {session.user.name}.</h5>
+
             
             { Object.keys(auth).length === 0 ? 
                     null
                     : 
                     <div>
-                      <h5 className="text-2xl">Hello , {auth.user.name}.</h5>
                       <h5 className="text-2xl">Phone : {auth.user.phone} </h5>
                     </div>
                     }
