@@ -61,6 +61,7 @@ function User({ session, handleSignOut , auth }){
                     null
                     : 
                     <div>
+                      <h5 className="text-2xl">Hello , {auth.user.name}.</h5>
                       <h5 className="text-2xl">Phone : {auth.user.phone} </h5>
                     </div>
                     }
