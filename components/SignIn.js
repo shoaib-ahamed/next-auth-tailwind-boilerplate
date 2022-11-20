@@ -35,6 +35,8 @@ export default function SignIn(){
 
     async function onSubmit(values){
 
+        console.log(values)
+
         const options = {
             method: "POST",
             headers : { 'Content-Type': 'application/json'},

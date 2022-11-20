@@ -2,7 +2,6 @@ import { getSession, signOut, useSession } from "next-auth/react"
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useContext } from 'react'
-import Sidebar from "../components/Sidebar"
 import { DataContext } from '../store/GlobalState'
 
 export default function Home() {
@@ -44,21 +43,13 @@ function Guest(){
 // Authorize User
 function User({ session, handleSignOut , auth }){
 
-  console.log(session)
-
   return(
-    <>
-    <main className="container flex gap-10">
+    <main className="container flex w-full h-screen justify-center text-center gap-10">
           <div>
-            <Sidebar handleSignOut={handleSignOut}/>
-          </div>
-          <div className="w-full text-center">
-
-          {(auth) ? null : <h5 className="text-2xl">Hello , {session.user.name}.</h5>}
 
             
             { Object.keys(auth).length === 0 ? 
-                    null
+                    <h5 className="text-2xl">Hello , {session.user.name}. </h5>
                     : 
                     <div>
                       <h5 className="text-2xl">Hello , {auth.user.name}.</h5>
@@ -68,7 +59,6 @@ function User({ session, handleSignOut , auth }){
                     <h3 className="text-xl">Welcome to Nesoi family.</h3>           
           </div>
       </main>
-    </>
   )
 }
 

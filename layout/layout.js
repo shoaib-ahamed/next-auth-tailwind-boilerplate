@@ -1,26 +1,24 @@
 
 // import styles from '../styles/Layout.module.css';
 
+import { useSession } from "next-auth/react";
 import Notify from "../components/Notify";
+import Sidebar from "../components/Sidebar";
+
 
 
 export default function Layout( { children }){
+    const { data: session } = useSession()
+
     return (
         <>
             <Notify/>
-            
-            {/* <div className="flex justify-center">
-                <div className="m-auto bg-slate-50 rounded-md  grid lg:grid-cols-2">
-                    
-                    <div className="right flex flex-col justify-evenly">
-                        <div className="text-center py-10">
-                            {children}
-                        </div>
-                    </div>
+            <div className="flex w-full">
+                {(session) ? <Sidebar className='w-96'/> : null }
+                <div className="w-full">
+                {children}
                 </div>
-            </div> */}
-
-            {children}
+            </div>
         </>
     )
 }
