@@ -6,8 +6,8 @@ const Sidebar = ({handleSignOut}) => {
 
   return (
     <div>
-        <div className="flex">
-            <div className={`flex flex-col w-20 md:w-72 duration-300 h-screen p-3 bg-white shadow`}>
+        <div className="flex" style={{height: '90vh'}}>
+            <div className={`flex flex-col w-20 md:w-72 duration-300  p-3 bg-white shadow`}>
                 <div className="space-y-3">
                     <div className="flex items-center">
                         <h2 className="text-xl font-bold hidden md:block">Dashboard</h2>
@@ -85,11 +85,7 @@ const Sidebar = ({handleSignOut}) => {
                                     <span className="hidden md:block">Settings</span>
                                 </a>
                             </li> */}
-                            <li className="rounded-sm" onClick={handleSignOut}>
-                                <a
-                                    href="#"
-                                    className="flex items-center p-2 space-x-3 rounded-md"
-                                >
+                            <li className="flex items-center p-2 space-x-3 rounded-md" onClick={handleSignOut}>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="w-6 h-6"
@@ -104,10 +100,9 @@ const Sidebar = ({handleSignOut}) => {
                                             d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                                         />
                                     </svg>
-                                    <button type="button" >
+                                    <button type="button" onClick={handleSignOut}>
                                     <span className="hidden md:block">Logout</span>
                                     </button>
-                                </a>
                             </li>
                         </ul>
                     </div>

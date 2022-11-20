@@ -1,29 +1,65 @@
 
-import connectMongo from '../../../database/conn';
-import Users from '../../../model/Schema'
-import { hash } from 'bcryptjs';
+/* eslint-disable import/no-anonymous-default-export */
 
-export default async function handler(req, res){
+import { hash } from 'bcryptjs';
+import connectMongo from '../../../database/conn';
+import Users from '../../../model/Schema';
+
+// export default async function handler(req, res){
+
+//     // only post method is accepted
+//     if(req.method === 'POST'){
+
+//         if(!req.body) return res.status(404).json({ error: "Don't have form data...!"});
+//         const { username, email, password } = req.body;
+
+//         // check duplicate users
+//         const checkexisting = await Users.findOne({ email });
+//         if(checkexisting) return res.status(422).json({ message: "User Already Exists...!"});
+
+//         // hash password
+//         Users.create({ username, email, password : await hash(password, 12)}, function(err, data){
+//             if(err) return res.status(404).json({ err });
+//             res.status(201).json({ status : true, user: data})
+//         })
+
+//     } else{
+//         res.status(500).json({ message: "HTTP method not valid only POST Accepted"})
+//     }
+
+// }
+
+
+export default async (req, res) => {
     connectMongo().catch(error => res.json({ error: "Connection Failed...!"}))
 
-    // only post method is accepted
-    if(req.method === 'POST'){
+    switch(req.method){
+        case "POST":
+            await register(req, res)
+            break;
+    }
+}
 
-        if(!req.body) return res.status(404).json({ error: "Don't have form data...!"});
-        const { username, email, password } = req.body;
+const register = async (req, res) => {
+    try{
+       
+        const { username, email, password , phone } = req.body
 
-        // check duplicate users
-        const checkexisting = await Users.findOne({ email });
-        if(checkexisting) return res.status(422).json({ message: "User Already Exists...!"});
+        const user = await Users.findOne({ email })
+        if(user) return res.status(400).json({err: 'This email already exists.'})
 
-        // hash password
-        Users.create({ username, email, password : await hash(password, 12)}, function(err, data){
-            if(err) return res.status(404).json({ err });
-            res.status(201).json({ status : true, user: data})
+        const passwordHash = await hash(password, 12)
+
+        const newUser = new Users({ 
+            username, email, password: passwordHash , phone
         })
 
-    } else{
-        res.status(500).json({ message: "HTTP method not valid only POST Accepted"})
-    }
+        await newUser.save()
+        
+        res.json({msg: "Register Success!" , user: newUser , status: true})
 
+    }catch(err){
+        return res.status(500).json({err: err.message})
+    }
 }
+

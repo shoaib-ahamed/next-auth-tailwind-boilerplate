@@ -41,17 +41,19 @@ function Guest(){
 }
 
 // Authorize User
-function User({ session, handleSignOut , auth }){
+function User({ session, auth }){
+
+  console.log('auth : ' , auth);
 
   return(
-    <main className="container flex w-full h-screen justify-center text-center gap-10">
+    <main className="container flex w-full h-90vh justify-center text-center gap-10">
           <div>
 
             
             { Object.keys(auth).length === 0 ? 
-                    <h5 className="text-2xl">Hello , {session.user.name}. </h5>
+                    <h5 className="text-2xl mt-10">Hello , {session.user.name}. </h5>
                     : 
-                    <div>
+                    <div className="mt-10">
                       <h5 className="text-2xl">Hello , {auth.user.name}.</h5>
                       <h5 className="text-2xl">Phone : {auth.user.phone} </h5>
                     </div>

@@ -13,8 +13,7 @@ const Notify = () => {
             {notify.error && 
                 <Toast
                     msg={{ msg: notify.error, title: "Error" }}
-                    handleShow={() => dispatch({ type: 'NOTIFY', payload: {} })}
-                    bgColor="bg-danger"
+                    handleShow={() => dispatch({ type: 'NOTIFY', payload: {} })}                
                 />
             }
 
@@ -22,7 +21,6 @@ const Notify = () => {
                 <Toast
                     msg={{ msg: notify.success, title: "Success" }}
                     handleShow={() => dispatch({ type: 'NOTIFY', payload: {} })}
-                    bgColor="bg-success"
                 />
             }
         </>

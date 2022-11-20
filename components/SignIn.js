@@ -7,6 +7,7 @@ import { FaGoogle } from "react-icons/fa";
 import { HiAtSymbol, HiFingerPrint } from "react-icons/hi";
 import login_validate from '../lib/validate';
 import { DataContext } from '../store/GlobalState';
+import { postData } from '../utils/fetchData';
 
 
 const baseUrl = process.env.NEXTAUTH_URL
@@ -35,32 +36,24 @@ export default function SignIn(){
 
     async function onSubmit(values){
 
-        console.log(values)
 
-        const options = {
-            method: "POST",
-            headers : { 'Content-Type': 'application/json'},
-            body: JSON.stringify(values)
-        }
+        const res = await postData('/auth/login' , values)
 
-        const res = await fetch(`${baseUrl}/api/auth/login`, options)
-            .then(res => res.json())
+        if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
+    
+            dispatch({ type: 'NOTIFY' ,  payload: {success: res.msg}})
 
-            if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
-      
-             dispatch({ type: 'NOTIFY' ,  payload: {success: res.msg}})
+            dispatch({ type: 'AUTH' ,  payload: {
+            token: res.access_token,
+            user: res.user
+            }})
 
-             dispatch({ type: 'AUTH' ,  payload: {
-                token: res.access_token,
-                user: res.user
-              }})
-
-            Cookie.set('refreshtoken' , res.refresh_token , {
-                path: 'api/auth/accessToken',
-                expires: 7
-              })
-        
-            localStorage.setItem('firstLogin' , true)
+        Cookie.set('refreshtoken' , res.refresh_token , {
+            path: 'api/auth/accessToken',
+            expires: 7
+            })
+    
+        localStorage.setItem('firstLogin' , true)
         
         const status = await signIn('credentials', {
             redirect: false,

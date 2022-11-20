@@ -12,8 +12,9 @@ export default function Layout( { children }){
 
     return (
         <>
-            <Notify/>
+            <Notify className="absolute top-0 right-1 z-50"/>
             <div className="flex w-full">
+                
                 {(session) ? <Sidebar className='w-96'/> : null }
                 <div className="w-full">
                 {children}

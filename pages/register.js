@@ -19,7 +19,8 @@ export default function Register(){
             username : '',
             email: '',
             password: '',
-            cpassword: ''
+            cpassword: '',
+            phone: ''
         },
         validate: registerValidate,
         onSubmit
@@ -37,6 +38,13 @@ export default function Register(){
             .then((data) => {
                 if(data) router.push(`${baseUrl}`)
             })
+
+        // const res = await postData('auth/signup' , values)
+
+        // if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err } })
+        // dispatch({ type: 'NOTIFY' ,  payload: {success: res.msg }})
+            
+        // if(res.status == true) router.push(`${baseUrl}`)
     }
 
     return (
@@ -105,6 +113,16 @@ export default function Register(){
                      <span className='icon flex items-center px-4' onClick={() => setShow({ ...show, cpassword: !show.cpassword})}>
                         <HiFingerPrint size={25} />
                     </span>
+                </div>
+
+                <div className={`${styles.input_group} ${formik.errors.phone && formik.touched.phone ? 'border-rose-600' : ''}`}>
+                    <input 
+                    type="text"
+                    name='phone'
+                    placeholder='Phone Number'
+                    className={styles.input_text}
+                    {...formik.getFieldProps('phone')}
+                    />
                 </div>
                 {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
 
