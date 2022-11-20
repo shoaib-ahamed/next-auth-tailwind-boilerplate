@@ -47,7 +47,7 @@ export default function Register(){
             <title>Register</title>
         </Head>
 
-        <section className='w-1/4 mx-auto flex flex-col gap-10'>
+        <section className='w-3/4 md:w-1/4 mx-auto flex flex-col gap-10'>
             <div className="title">
                 <h1 className='text-gray-800 text-4xl text-center font-bold py-4'>Register</h1>
             </div>
@@ -109,8 +109,8 @@ export default function Register(){
                 {/* {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>} */}
 
                 {/* login buttons */}
-                <div className="input-button">
-                    <button type='submit' className={styles.button}>
+                <div className="flex justify-center">
+                    <button type='submit' className="rounded-full px-12 py-2 inline-block font-bold text-green-800 border border-green-800 hover:bg-green-800 hover:text-white hover:border-black">
                         Sign Up
                     </button>
                 </div>
@@ -118,7 +118,7 @@ export default function Register(){
 
             {/* bottom */}
             <p className='text-center text-gray-400 '>
-                Have an account? <Link href={'/login'}><a className='text-blue-700'>Sign In</a></Link>
+                Have an account? <Link href={'/login'}><a className='text-green-800'>Sign In</a></Link>
             </p>
         </section>
         </Layout>

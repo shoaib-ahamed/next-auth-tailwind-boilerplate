@@ -1,4 +1,5 @@
 import { useFormik } from 'formik';
+import Cookie from 'js-cookie';
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
@@ -10,12 +11,13 @@ import { DataContext } from '../store/GlobalState';
 
 
 
+
 export default function SignIn(){
 
     const [show, setShow] = useState(false)
     const router = useRouter()
 
-    const [dispatch] = useContext(DataContext)
+    const [state , dispatch] = useContext(DataContext)
     // formik hook
     const formik = useFormik({
         initialValues: {
@@ -26,7 +28,37 @@ export default function SignIn(){
         onSubmit
     })
 
+    /**
+     * haleykennedy@gmail.com
+     * admin123
+     */
+
     async function onSubmit(values){
+
+        const options = {
+            method: "POST",
+            headers : { 'Content-Type': 'application/json'},
+            body: JSON.stringify(values)
+        }
+
+        const res = await fetch('http://localhost:3000/api/auth/login', options)
+            .then(res => res.json())
+
+            if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
+      
+             dispatch({ type: 'NOTIFY' ,  payload: {success: res.msg}})
+
+             dispatch({ type: 'AUTH' ,  payload: {
+                token: res.access_token,
+                user: res.user
+              }})
+
+            Cookie.set('refreshtoken' , res.refresh_token , {
+                path: 'api/auth/accessToken',
+                expires: 7
+              })
+        
+            localStorage.setItem('firstLogin' , true)
         
         const status = await signIn('credentials', {
             redirect: false,
@@ -35,8 +67,6 @@ export default function SignIn(){
             callbackUrl: "/"
         })
 
-        // if(status.ok) return  dispatch({ type: 'NOTIFY', payload: {loading: true}})
-
 
         if(status.ok) router.push(status.url)
         
@@ -44,12 +74,13 @@ export default function SignIn(){
 
     // Google Handler function
     async function handleGoogleSignin(){
-        signIn('google', { callbackUrl : "https://next-auth-tailwind-boilerplate.vercel.app"})
+        dispatch({ type: 'NOTIFY', payload: {}})
+        signIn('google', { callbackUrl : "http://localhost:3000"})
     }
 
     // Github Login 
     async function handleGithubSignin(){
-        signIn('github', { callbackUrl : "https://next-auth-tailwind-boilerplate.vercel.app"})
+        signIn('github', { callbackUrl : "http://localhost:3000"})
     }
 
     return (
@@ -102,7 +133,7 @@ export default function SignIn(){
                 {/* {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>} */}
                 {/* login buttons */}
                 <div className="input-button">
-                    <button type='submit' className="bg-jet rounded-full px-12 py-2 inline-block font-bold text-white hover:bg-winterSky hover:text-white hover:border-black">
+                    <button type='submit' className="bg-jet rounded-full px-12 py-2 inline-block font-bold text-green-800 border border-green-800 hover:bg-green-800 hover:text-white hover:border-black">
                         Login
                     </button>
                 </div>

@@ -1,26 +1,29 @@
 import { getSession, signOut, useSession } from "next-auth/react"
 import Head from 'next/head'
 import Link from 'next/link'
+import React, { useContext } from 'react'
 import Sidebar from "../components/Sidebar"
-import styles from '../styles/Home.module.css'
+import { DataContext } from '../store/GlobalState'
 
 export default function Home() {
 
   const { data: session } = useSession()
 
-  console.log(session)
+  const [state , dispatch] = useContext(DataContext)
+
+  const { auth  } = state
 
   function handleSignOut(){
     signOut()
   }
 
   return (
-    <div className={styles.container}>
+    <div className="">
       <Head>
         <title>Home Page</title>
       </Head>
 
-      {session ? User({ session, handleSignOut }) : Guest()}
+      {session ? User({ session, handleSignOut , auth }) : Guest()}
     </div>
   )
 }
@@ -39,16 +42,24 @@ function Guest(){
 }
 
 // Authorize User
-function User({ session, handleSignOut }){
+function User({ session, handleSignOut , auth }){
   return(
     <>
     <main className="container flex gap-10">
           <div>
             <Sidebar handleSignOut={handleSignOut}/>
           </div>
-          <div>
-            <h5 className="text-2xl">Hello , {session.user.name}.</h5>
-            <h3 className="text-xl">Welcome to family.</h3>
+          <div className="w-full text-center">
+            
+            { Object.keys(auth).length === 0 ? 
+                    null
+                    : 
+                    <div>
+                      <h5 className="text-2xl">Hello , {auth.user.name}.</h5>
+                      <h5 className="text-2xl">Phone : {auth.user.phone} </h5>
+                    </div>
+                    }
+                    <h3 className="text-xl">Welcome to Nesoi family.</h3>           
           </div>
       </main>
     </>
