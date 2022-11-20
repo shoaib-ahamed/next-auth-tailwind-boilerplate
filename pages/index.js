@@ -54,7 +54,7 @@ function User({ session, handleSignOut , auth }){
           </div>
           <div className="w-full text-center">
 
-          <h5 className="text-2xl">Hello , {session.user.name}.</h5>
+          {(session) ? <h5 className="text-2xl">Hello , {session.user.name}.</h5> : null}
 
             
             { Object.keys(auth).length === 0 ? 
