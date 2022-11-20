@@ -7,7 +7,7 @@ const Sidebar = ({handleSignOut}) => {
   return (
     <div>
         <div className="flex">
-            <div className={`flex flex-col w-24 md:w-72 duration-300 h-screen p-3 bg-white shadow w-60`}>
+            <div className={`flex flex-col w-20 md:w-72 duration-300 h-screen p-3 bg-white shadow`}>
                 <div className="space-y-3">
                     <div className="flex items-center">
                         <h2 className="text-xl font-bold hidden md:block">Dashboard</h2>
