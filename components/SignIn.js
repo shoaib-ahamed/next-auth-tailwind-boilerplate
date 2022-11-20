@@ -41,9 +41,7 @@ export default function SignIn(){
             body: JSON.stringify(values)
         }
 
-        const loginUrl = baseUrl+"/api/auth/login"
-
-        const res = await fetch(loginUrl, options)
+        const res = await fetch(`${baseUrl}/api/auth/login`, options)
             .then(res => res.json())
 
             if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
