@@ -9,7 +9,7 @@ import login_validate from '../lib/validate';
 import { DataContext } from '../store/GlobalState';
 
 
-
+const baseUrl = process.env.NEXTAUTH_URL
 
 
 export default function SignIn(){
@@ -41,7 +41,9 @@ export default function SignIn(){
             body: JSON.stringify(values)
         }
 
-        const res = await fetch('http://localhost:3000/api/auth/login', options)
+        const loginUrl = baseUrl+"/api/auth/login"
+
+        const res = await fetch(loginUrl, options)
             .then(res => res.json())
 
             if(res.err) return dispatch({ type: 'NOTIFY' ,  payload: {error: res.err}})
