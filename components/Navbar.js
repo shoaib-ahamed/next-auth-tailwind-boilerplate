@@ -1,13 +1,19 @@
 // import { FiMoon, FiSun } from ' react-icons/fi';
+import Cookie from 'js-cookie';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { VscSignOut } from 'react-icons/vsc';
+import { DataContext } from '../store/GlobalState';
+
 
 
 const Navbar = () => {
     const [isNavOpen, setIsNavOpen] = useState(false);
     const [mounted , setMounted] = useState(false);
+
+    const [state , dispatch] = useContext(DataContext)
+
 
     const session = useSession()
 
@@ -15,6 +21,14 @@ const Navbar = () => {
     useEffect(() => {
       setMounted(true)
     },[])
+
+    const handleLogout = () => {
+      Cookie.remove('refreshtoken' , {path: 'api/auth/accessToken'})
+      localStorage.removeItem('firstLogin')
+      signOut()
+      dispatch({ type: 'AUTH' , payload: {}})
+      dispatch({ type: 'NOTIFY' ,  payload: {success: 'Logged out!'}})
+  }
 
     // const {systemTheme , theme , setTheme} = useTheme()
 
@@ -76,7 +90,7 @@ const Navbar = () => {
               <li className="border-b border-green-800 my-2 uppercase">
                 <a href="/contact">Contact</a>
               </li>
-              {(session.data) ? <li> <button onClick={() => signOut()} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
+              {(session.data) ? <li> <button onClick={handleLogout} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
               </li> : <></>}
               {/* <li>
                 <RenderThemeChanger/>
@@ -95,7 +109,7 @@ const Navbar = () => {
           <li>
             <a href="/contact">Contact</a>
           </li>
-          {(session.data) ? <li> <button onClick={() => signOut()} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
+          {(session.data) ? <li> <button onClick={handleLogout} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
               </li> : <></>}
           {/* <li>
             <RenderThemeChanger/>
