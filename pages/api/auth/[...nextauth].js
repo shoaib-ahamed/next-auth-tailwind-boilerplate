@@ -1,9 +1,12 @@
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { compare } from 'bcryptjs';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from "next-auth/providers/google";
 import connectMongo from '../../../database/conn';
-import Users from '../../../model/Schema';
+import Users from '../../../model/UserSchema';
+import clientPromise from '../../../utils/clientPromise';
+
 
 export default NextAuth({
     providers : [
@@ -40,6 +43,7 @@ export default NextAuth({
             }
         })
     ],
+    adapter: MongoDBAdapter(clientPromise),
     secret: process.env.NEXTAUTH_SECRET,
     session: {
         strategy: 'jwt',
