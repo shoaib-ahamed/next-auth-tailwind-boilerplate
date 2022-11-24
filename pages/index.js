@@ -43,8 +43,6 @@ function Guest(){
 // Authorize User
 function User({ session, auth }){
 
-  console.log('auth : ' , auth);
-
   return(
     <main className="container flex w-full h-90vh justify-center text-center gap-10">
           <div>

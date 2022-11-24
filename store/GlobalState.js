@@ -20,7 +20,7 @@ export const DataProvider = ({children}) => {
 
                 dispatch({ type: 'AUTH' ,  payload: {
                     token: res.access_token,
-                    user: res.user
+                    user: res.user,
                 }})
             })
         }

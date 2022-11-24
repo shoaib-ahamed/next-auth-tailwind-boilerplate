@@ -1,6 +1,5 @@
-import { signOut } from 'next-auth/react';
 import React, { useState } from 'react';
-import { VscSignOut } from 'react-icons/vsc';
+import { AiFillWechat, AiOutlineHome } from 'react-icons/ai';
 
 
 const Sidebar = () => {
@@ -9,7 +8,7 @@ const Sidebar = () => {
   return (
     <div>
         <div className="flex" style={{height: '90vh'}}>
-            <div className={`flex flex-col w-20 md:w-72 duration-300  p-3 bg-white shadow`}>
+            <div className={`flex flex-col w-20 md:w-40 duration-300  p-3 bg-white shadow`}>
                 <div className="space-y-3">
                     <div className="flex items-center">
                         <h2 className="text-xl font-bold hidden md:block">Dashboard</h2>
@@ -21,21 +20,19 @@ const Sidebar = () => {
                                     href="./"
                                     className="flex items-center p-2 space-x-3 rounded-md"
                                 >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-6 h-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                        strokeWidth={2}
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                                        />
-                                    </svg>
+                                    <AiOutlineHome className="text-2xl"/>
+                                    
                                     <span className="hidden md:block">Home</span>
+                                </a>
+                            </li>
+                            <li className="rounded-sm">
+                                <a
+                                    href="./chat"
+                                    className="flex items-center p-2 space-x-3 rounded-md"
+                                >
+                                    <AiFillWechat className="text-2xl"/>
+                                    
+                                    <span className="hidden md:block">Chat</span>
                                 </a>
                             </li>
                             {/* <li className="rounded-sm">
@@ -87,12 +84,12 @@ const Sidebar = () => {
                                     <span className="hidden md:block">Settings</span>
                                 </a>
                             </li> */}
-                            <li>
+                            {/* <li>
                                 <button className="flex items-center p-2 space-x-3 rounded-md" type="button" onClick={() => signOut()}>
                                     <VscSignOut className="text-2xl"/>
                                     <span className="hidden md:block">Logout</span>
                                 </button>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

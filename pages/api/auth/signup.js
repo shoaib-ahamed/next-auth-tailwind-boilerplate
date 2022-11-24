@@ -3,7 +3,7 @@
 
 import { hash } from 'bcryptjs';
 import connectMongo from '../../../database/conn';
-import Users from '../../../model/Schema';
+import Users from '../../../model/UserSchema';
 
 // export default async function handler(req, res){
 
@@ -43,7 +43,9 @@ export default async (req, res) => {
 const register = async (req, res) => {
     try{
        
-        const { username, email, password , phone } = req.body
+        const { name, email, password , phone } = req.body
+
+        console.log(name, email, password , phone)
 
         const user = await Users.findOne({ email })
         if(user) return res.status(400).json({err: 'This email already exists.'})
@@ -51,8 +53,10 @@ const register = async (req, res) => {
         const passwordHash = await hash(password, 12)
 
         const newUser = new Users({ 
-            username, email, password: passwordHash , phone
+            name:name, email, password: passwordHash , phone
         })
+
+        console.log(newUser)
 
         await newUser.save()
         

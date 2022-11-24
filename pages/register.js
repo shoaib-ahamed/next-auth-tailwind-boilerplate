@@ -16,7 +16,7 @@ export default function Register(){
     const router = useRouter()
     const formik = useFormik({
         initialValues: {
-            username : '',
+            name : '',
             email: '',
             password: '',
             cpassword: '',
@@ -27,6 +27,8 @@ export default function Register(){
     })
 
     async function onSubmit(values){
+
+        console.log(values)
         const options = {
             method: "POST",
             headers : { 'Content-Type': 'application/json'},
@@ -65,10 +67,10 @@ export default function Register(){
                 <div className={`${styles.input_group} ${formik.errors.username && formik.touched.username ? 'border-rose-600' : ''}`}>
                     <input 
                     type="text"
-                    name='Username'
+                    name='name'
                     placeholder='Username'
                     className={styles.input_text}
-                    {...formik.getFieldProps('username')}
+                    {...formik.getFieldProps('name')}
                     />
                     <span className='icon flex items-center px-4'>
                         <HiOutlineUser size={25} />
