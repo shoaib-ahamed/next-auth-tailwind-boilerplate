@@ -1,10 +1,7 @@
-import { signOut } from 'next-auth/react';
-import React, { useState } from 'react';
-import { VscSignOut } from 'react-icons/vsc';
+import React from 'react';
 
 
 const Sidebar = () => {
-    const [open , setOpen] = useState(true)
 
   return (
     <div>
@@ -87,12 +84,12 @@ const Sidebar = () => {
                                     <span className="hidden md:block">Settings</span>
                                 </a>
                             </li> */}
-                            <li>
+                            {/* <li>
                                 <button className="flex items-center p-2 space-x-3 rounded-md" type="button" onClick={() => signOut()}>
                                     <VscSignOut className="text-2xl"/>
                                     <span className="hidden md:block">Logout</span>
                                 </button>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

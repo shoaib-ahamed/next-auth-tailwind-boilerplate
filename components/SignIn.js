@@ -29,10 +29,6 @@ export default function SignIn(){
         onSubmit
     })
 
-    /**
-     * haleykennedy@gmail.com
-     * admin123
-     */
 
     async function onSubmit(values){
 
@@ -69,13 +65,12 @@ export default function SignIn(){
 
     // Google Handler function
     async function handleGoogleSignin(){
-        dispatch({ type: 'NOTIFY', payload: {}})
-        signIn('google', { callbackUrl : "http://localhost:3000"})
+        signIn('google', { callbackUrl : baseUrl})
     }
 
     // Github Login 
     async function handleGithubSignin(){
-        signIn('github', { callbackUrl : "http://localhost:3000"})
+        signIn('github', { callbackUrl : baseUrl})
     }
 
     return (

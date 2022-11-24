@@ -3,7 +3,7 @@
 
 import { hash } from 'bcryptjs';
 import connectMongo from '../../../database/conn';
-import Users from '../../../model/Schema';
+import Users from '../../../model/UserSchema';
 
 // export default async function handler(req, res){
 
@@ -11,14 +11,14 @@ import Users from '../../../model/Schema';
 //     if(req.method === 'POST'){
 
 //         if(!req.body) return res.status(404).json({ error: "Don't have form data...!"});
-//         const { username, email, password } = req.body;
+//         const { name, email, password } = req.body;
 
 //         // check duplicate users
 //         const checkexisting = await Users.findOne({ email });
 //         if(checkexisting) return res.status(422).json({ message: "User Already Exists...!"});
 
 //         // hash password
-//         Users.create({ username, email, password : await hash(password, 12)}, function(err, data){
+//         Users.create({ name, email, password : await hash(password, 12)}, function(err, data){
 //             if(err) return res.status(404).json({ err });
 //             res.status(201).json({ status : true, user: data})
 //         })
@@ -43,7 +43,9 @@ export default async (req, res) => {
 const register = async (req, res) => {
     try{
        
-        const { username, email, password , phone } = req.body
+        const { name, email, password , phone } = req.body
+
+        console.log(name)
 
         const user = await Users.findOne({ email })
         if(user) return res.status(400).json({err: 'This email already exists.'})
@@ -51,7 +53,7 @@ const register = async (req, res) => {
         const passwordHash = await hash(password, 12)
 
         const newUser = new Users({ 
-            username, email, password: passwordHash , phone
+            name, email, password: passwordHash , phone
         })
 
         await newUser.save()

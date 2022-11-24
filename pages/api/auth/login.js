@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { compare } from 'bcryptjs';
 import connectMongo from '../../../database/conn';
-import Users from '../../../model/Schema';
+import Users from '../../../model/UserSchema';
 import { createAccessToken, createRefreshToken } from '../../../utils/generateToken';
 
 

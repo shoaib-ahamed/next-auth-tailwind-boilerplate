@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import jwt from 'jsonwebtoken';
 import connectMongo from '../../../database/conn';
-import Users from '../../../model/Schema';
+import Users from '../../../model/UserSchema';
 import { createAccessToken } from '../../../utils/generateToken';
 
 connectMongo()
@@ -22,7 +22,7 @@ export default async (req, res) => {
         res.json({
             access_token,
             user: {
-                name: user.username,
+                name: user.name,
                 email: user.email,
                 phone: user.phone
             }
