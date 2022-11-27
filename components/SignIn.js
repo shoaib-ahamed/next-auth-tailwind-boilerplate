@@ -10,7 +10,7 @@ import { DataContext } from '../store/GlobalState';
 import { postData } from '../utils/fetchData';
 
 
-const baseUrl = process.env.NEXTAUTH_URL
+const baseUrl = `${process.env.NEXTAUTH_URL}/dashboard`
 
 
 export default function SignIn(){
@@ -55,7 +55,7 @@ export default function SignIn(){
             redirect: false,
             email: values.email,
             password: values.password,
-            callbackUrl: "/"
+            callbackUrl: "/dashboard"
         })
 
 

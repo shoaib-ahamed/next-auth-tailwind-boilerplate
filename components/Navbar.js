@@ -1,8 +1,10 @@
 // import { FiMoon, FiSun } from ' react-icons/fi';
 import Cookie from 'js-cookie';
 import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
+import { HiMenu } from 'react-icons/hi';
 import { VscSignOut } from 'react-icons/vsc';
 import { DataContext } from '../store/GlobalState';
 
@@ -15,7 +17,8 @@ const Navbar = () => {
     const [state , dispatch] = useContext(DataContext)
 
 
-    const session = useSession()
+    const { data: session } = useSession()
+
 
 
     useEffect(() => {
@@ -49,17 +52,16 @@ const Navbar = () => {
     // }
     
   return (
-    <div className="flex items-center justify-between border-b border-green-800 py-6 px-12">
-      <Link href="/"><a className="text-3xl"> <span className="text-green-800">LOGO</span></a></Link>
+    <div className="flex items-center justify-between border-b border-green-800 py-6 px-20">
+      <Link href="/"><a className="text-3xl"> <Image src='/Logo.png' height="50" width="50" alt="LOGO"/></a></Link>
       <nav>
         <section className="MOBILE-MENU flex lg:hidden">
           <div
             className="HAMBURGER-ICON space-y-2"
             onClick={() => setIsNavOpen((prev) => !prev)}
           >
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-            <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+          <HiMenu className="text-4xl"/>
+
           </div>
 
           <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
@@ -67,30 +69,25 @@ const Navbar = () => {
               className="absolute top-0 right-0 px-8 py-8" 
               onClick={() => setIsNavOpen(false)}
             >
-              <svg
-                className="h-8 w-8 text-green-800"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              <HiMenu className="text-3xl"/>
             </div>
             <ul className="flex flex-col items-center justify-center gap-6 min-h-screen">
-              <li className="border-b border-green-800 my-2 uppercase">
+            {(session) ? 
+              <li>
+                <a href="/dashboard">Dashboard</a>
+              </li>
+              :
+              <li>
                 <a href="/about">About</a>
               </li>
+              }
               <li className="border-b border-green-800 my-2 uppercase">
                 <Link href="/profile">Profile</Link>
               </li>
               <li className="border-b border-green-800 my-2 uppercase">
                 <a href="/contact">Contact</a>
               </li>
-              {(session.data) ? <li> <button onClick={handleLogout} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
+              {(session) ? <li> <button onClick={handleLogout} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
               </li> : <></>}
               {/* <li>
                 <RenderThemeChanger/>
@@ -100,16 +97,22 @@ const Navbar = () => {
         </section>
 
         <ul className="DESKTOP-MENU hidden space-x-8 items-center justify-center lg:flex">
+          {(session) ? 
+          <li>
+            <a href="/dashboard">Dashboard</a>
+          </li>
+          :
           <li>
             <a href="/about">About</a>
           </li>
+          }
           <li>
             <Link href={"/profile"}>Profile</Link>
           </li>
           <li>
             <a href="/contact">Contact</a>
           </li>
-          {(session.data) ? <li> <button onClick={handleLogout} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
+          {(session) ? <li> <button onClick={handleLogout} className="bg-green-800 text-white px-5 py-3"><VscSignOut/></button>
               </li> : <></>}
           {/* <li>
             <RenderThemeChanger/>

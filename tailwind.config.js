@@ -6,7 +6,11 @@ module.exports = {
     "./layout/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        header : "IBM Plex Serif"
+      }
+    },
   },
   plugins: [],
 }
