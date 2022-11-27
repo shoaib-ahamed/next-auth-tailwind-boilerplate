@@ -53,7 +53,7 @@ const Navbar = () => {
     
   return (
     <div className="flex items-center justify-between border-b border-green-800 py-6 px-20">
-      <Link href="/"><a className="text-3xl"> <Image src='/Logo.png' height="50" width="50" alt="LOGO"/></a></Link>
+      <Link href="/"><a className="text-3xl"> <Image src='/Logo.png' height="50" width="60" alt="LOGO"/></a></Link>
       <nav>
         <section className="MOBILE-MENU flex lg:hidden">
           <div
